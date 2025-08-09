@@ -1,4 +1,4 @@
-# 🚀 Quick Start Guide - AllOrigins Cloudflare Worker
+# 🚀 Quick Start Guide
 
 Get your AllOrigins API running on Cloudflare Workers in just a few minutes!
 
@@ -7,7 +7,7 @@ Get your AllOrigins API running on Cloudflare Workers in just a few minutes!
 - Node.js 18+ installed
 - A Cloudflare account (free tier works)
 
-## 1. Setup
+## 1. Setup & Deploy
 
 ```bash
 # Install Wrangler CLI globally
@@ -16,27 +16,12 @@ npm install -g wrangler
 # Login to Cloudflare
 wrangler login
 
-# Set up the project
-cp package-worker.json package.json
+# Install dependencies and deploy
 npm install
+npm run deploy
 ```
 
-## 2. Quick Deploy
-
-### Option A: Use the Deploy Script
-```bash
-chmod +x deploy.sh
-./deploy.sh
-```
-
-### Option B: Manual Deploy
-```bash
-# Deploy directly
-wrangler deploy
-
-# Or for development
-wrangler dev
-```
+That's it! Your API is now live globally.
 
 ## 3. Test Your Deployment
 
@@ -56,13 +41,16 @@ https://your-worker.your-subdomain.workers.dev/info?url=https://httpbin.org/json
 ## 4. Configuration (Optional)
 
 ### Custom Domain
+
 Edit `wrangler.toml`:
+
 ```toml
 [env.production]
 route = "api.yourdomain.com/*"
 ```
 
 ### Environment Variables
+
 ```toml
 [vars]
 DEBUG = "false"
@@ -72,18 +60,24 @@ USER_AGENT = "Custom User Agent"
 ## 5. Examples
 
 ### JavaScript/Fetch
+
 ```javascript
 // Get contents
-const response = await fetch('https://your-worker.workers.dev/get?url=https://example.com');
+const response = await fetch(
+	"https://your-worker.workers.dev/get?url=https://example.com"
+);
 const data = await response.json();
 console.log(data.contents);
 
 // Get raw HTML
-const raw = await fetch('https://your-worker.workers.dev/raw?url=https://example.com');
+const raw = await fetch(
+	"https://your-worker.workers.dev/raw?url=https://example.com"
+);
 const html = await raw.text();
 ```
 
 ### cURL
+
 ```bash
 # JSON response
 curl "https://your-worker.workers.dev/get?url=https://httpbin.org/json"
@@ -96,10 +90,14 @@ curl "https://your-worker.workers.dev/info?url=https://httpbin.org/json"
 ```
 
 ### jQuery/AJAX
+
 ```javascript
-$.getJSON('https://your-worker.workers.dev/get?url=https://example.com&callback=?', function(data) {
-    console.log(data.contents);
-});
+$.getJSON(
+	"https://your-worker.workers.dev/get?url=https://example.com&callback=?",
+	function (data) {
+		console.log(data.contents);
+	}
+);
 ```
 
 ## 6. Key Features
@@ -109,63 +107,68 @@ $.getJSON('https://your-worker.workers.dev/get?url=https://example.com&callback=
 ✅ **Auto-scaling** - Handles traffic spikes automatically  
 ✅ **Fast** - Sub-50ms cold starts  
 ✅ **Reliable** - 99.9%+ uptime  
-✅ **Cost-effective** - Pay per request  
+✅ **Cost-effective** - Pay per request
 
 ## 7. API Reference
 
 ### Endpoints
 
-| Endpoint | Description | Example |
-|----------|-------------|---------|
-| `/get` | Returns page contents as JSON | `/get?url=https://example.com` |
-| `/raw` | Returns raw page content | `/raw?url=https://example.com` |
-| `/info` | Returns page metadata only | `/info?url=https://example.com` |
+| Endpoint | Description                   | Example                         |
+| -------- | ----------------------------- | ------------------------------- |
+| `/get`   | Returns page contents as JSON | `/get?url=https://example.com`  |
+| `/raw`   | Returns raw page content      | `/raw?url=https://example.com`  |
+| `/info`  | Returns page metadata only    | `/info?url=https://example.com` |
 
 ### Parameters
 
-| Parameter | Description | Default |
-|-----------|-------------|---------|
-| `url` | Target URL to fetch (required) | - |
-| `callback` | JSONP callback function name | - |
-| `charset` | Character encoding for the response | utf-8 |
+| Parameter  | Description                         | Default |
+| ---------- | ----------------------------------- | ------- |
+| `url`      | Target URL to fetch (required)      | -       |
+| `callback` | JSONP callback function name        | -       |
+| `charset`  | Character encoding for the response | utf-8   |
 
 ### Response Format
 
 #### JSON Response (`/get`)
+
 ```json
 {
-  "contents": "<html>...</html>",
-  "status": {
-    "url": "https://example.com",
-    "content_type": "text/html",
-    "content_length": 1234,
-    "http_code": 200
-  }
+	"contents": "<html>...</html>",
+	"status": {
+		"url": "https://example.com",
+		"content_type": "text/html",
+		"content_length": 1234,
+		"http_code": 200
+	}
 }
 ```
 
 #### Info Response (`/info`)
+
 ```json
 {
-  "url": "https://example.com",
-  "content_type": "text/html", 
-  "content_length": 1234,
-  "http_code": 200
+	"url": "https://example.com",
+	"content_type": "text/html",
+	"content_length": 1234,
+	"http_code": 200
 }
 ```
 
 ## 8. Troubleshooting
 
 ### Worker Not Responding
+
 - Check `wrangler dev` for local testing
 - Verify `wrangler.toml` configuration
 - Check Cloudflare dashboard for deployment status
 
 ### CORS Issues
+
 - The Worker automatically adds CORS headers
 - Make sure you're using the correct Worker URL
 
 ### Rate Limiting
+
 - Cloudflare Workers have generous free tier limits
 - For high traffic, consider upgrading to paid plan
 

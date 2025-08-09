@@ -36,36 +36,36 @@ Get contents as JSON:
 
 ```javascript
 fetch(
-  `https://your-worker.workers.dev/get?url=${encodeURIComponent(
-    'https://httpbin.org/json'
-  )}`
+	`https://your-worker.workers.dev/get?url=${encodeURIComponent(
+		"https://httpbin.org/json"
+	)}`
 )
-  .then((response) => response.json())
-  .then((data) => console.log(data.contents))
+	.then((response) => response.json())
+	.then((data) => console.log(data.contents));
 ```
 
 With jQuery/JSONP:
 
 ```javascript
 $.getJSON(
-  'https://your-worker.workers.dev/get?url=' +
-    encodeURIComponent('https://httpbin.org/json'),
-  function (data) {
-    console.log(data.contents)
-  }
-)
+	"https://your-worker.workers.dev/get?url=" +
+		encodeURIComponent("https://httpbin.org/json"),
+	function (data) {
+		console.log(data.contents);
+	}
+);
 ```
 
 Get raw content:
 
 ```javascript
 fetch(
-  `https://your-worker.workers.dev/raw?url=${encodeURIComponent(
-    'https://httpbin.org/html'
-  )}`
+	`https://your-worker.workers.dev/raw?url=${encodeURIComponent(
+		"https://httpbin.org/html"
+	)}`
 )
-  .then((response) => response.text())
-  .then((html) => console.log(html))
+	.then((response) => response.text())
+	.then((html) => console.log(html));
 ```
 
 ## 🛠️ API Options
@@ -88,13 +88,13 @@ fetch(
 
 ```json
 {
-  "contents": "<html>...</html>",
-  "status": {
-    "url": "https://example.com",
-    "content_type": "text/html",
-    "content_length": 1234,
-    "http_code": 200
-  }
+	"contents": "<html>...</html>",
+	"status": {
+		"url": "https://example.com",
+		"content_type": "text/html",
+		"content_length": 1234,
+		"http_code": 200
+	}
 }
 ```
 
@@ -102,10 +102,10 @@ fetch(
 
 ```json
 {
-  "url": "https://example.com",
-  "content_type": "text/html",
-  "content_length": 1234,
-  "http_code": 200
+	"url": "https://example.com",
+	"content_type": "text/html",
+	"content_length": 1234,
+	"http_code": 200
 }
 ```
 
@@ -144,19 +144,11 @@ npm run dev
 
 # Deploy to production
 npm run deploy
-
-# Run tests
-npm test
-
-# Format code
-npm run prettier
 ```
 
 ## 📚 Documentation
 
 - **[QUICK-START.md](QUICK-START.md)** - Get up and running in minutes
-- **[MIGRATION.md](MIGRATION.md)** - Migration guide from Node.js version
-- **[README-worker.md](README-worker.md)** - Detailed Worker documentation
 
 ## 🔧 Configuration
 
