@@ -1,7 +1,7 @@
 {
 	"name": "allorigins-worker",
 	"description": "Pull contents from any page as JSON via API - Cloudflare Worker",
-	"author": "Gabriel Nunes <gabriel@multiverso.me>",
+	"author": "Abdullah Jaffer",
 	"version": "2.7.0",
 	"type": "module",
 	"main": "worker.js",
